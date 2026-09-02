@@ -1,21 +1,104 @@
-const collections = [
-  { number: '01', title: 'Bridal Heirlooms', copy: 'Hand-finished lehengas, veils and trousseau pieces made for the day—and the generations after.', tone: 'rose' },
-  { number: '02', title: 'Groom & Family', copy: 'Sherwanis, bandhgalas and coordinated occasionwear, tailored for a beautifully considered wedding party.', tone: 'gold' },
-  { number: '03', title: 'Celebration Edit', copy: 'Distinctive silhouettes for sangeet, mehendi, receptions and every invitation on your calendar.', tone: 'plum' },
+'use client';
+
+import { useEffect, useMemo, useState } from 'react';
+
+const products = [
+  { id: 1, name: 'Gulabo Rose Lehenga', colour: 'Rose pink', image: '/products/rose-pink.jpeg', category: 'Lehengas' },
+  { id: 2, name: 'Rani Bagh Lehenga', colour: 'Rani red', image: '/products/rani-red.jpeg', category: 'Lehengas' },
+  { id: 3, name: 'Gulabi Sitara Lehenga', colour: 'Gulabi pink', image: '/products/gulabi-pink.jpeg', category: 'Lehengas' },
+  { id: 4, name: 'Mehroon Zari Sharara', colour: 'Deep maroon', image: '/products/mehroon.jpeg', category: 'Sharara' },
+  { id: 5, name: 'Genda Phool Lehenga', colour: 'Coral orange', image: '/products/coral.jpeg', category: 'Lehengas' },
+  { id: 6, name: 'Gulab Noor Lehenga', colour: 'Pink & ivory', image: '/products/gulab-ivory.jpeg', category: 'Lehengas' },
+  { id: 7, name: 'Jamuni Jaal Lehenga', colour: 'Royal plum', image: '/products/jamuni.jpeg', category: 'Lehengas' },
+  { id: 8, name: 'Laal Ishq Lehenga', colour: 'Bridal red', image: '/products/laal.jpeg', category: 'Lehengas' },
 ];
-const steps = [
-  ['01', 'Tell us your story', 'Share your occasion, references, colours and timeline with our design team.'],
-  ['02', 'Design together', 'We refine the silhouette, fabric and embroidery until every detail feels distinctly yours.'],
-  ['03', 'Made for you', 'Your piece is carefully crafted, fitted and finished for an effortless final look.'],
-];
+
 export default function Home() {
-  return <main>
-    <nav className="nav shell" aria-label="Main navigation"><a className="brand" href="#top" aria-label="Regal Embroidery home">RE <span>Regal<br/>Embroidery</span></a><div className="navlinks"><a href="#collections">Collections</a><a href="#process">Our process</a><a href="#about">Our craft</a></div><a className="nav-cta" href="#contact">Book a consultation</a></nav>
-    <section className="hero" id="top"><div className="hero-ornament ornament-one"/><div className="hero-ornament ornament-two"/><div className="hero-copy shell"><p className="eyebrow">Made in India · Made for you</p><h1>Clothes for your<br/><em>most beautiful</em> days.</h1><p className="lede">Custom Indian occasionwear, thoughtfully designed and intricately embroidered for weddings, celebrations and everything worth remembering.</p><div className="hero-actions"><a className="button light" href="#contact">Begin your custom piece <span>↗</span></a><a className="text-link" href="#collections">Explore our world <span>↓</span></a></div></div><div className="hero-note"><span>✦</span>Bespoke by appointment<br/>India & worldwide</div></section>
-    <section className="intro shell" id="about"><p className="section-kicker">The Regal signature</p><div><h2>Tradition, drawn<br/>in a modern hand.</h2><p>We bring India’s rich embroidery language to contemporary silhouettes. Every piece begins with a conversation and ends with the smallest details considered—from the first sketch to the final hand-finished seam.</p><a className="underlink" href="#process">Discover our process <span>→</span></a></div></section>
-    <section className="collections" id="collections"><div className="shell section-head"><div><p className="section-kicker">Designed for the occasion</p><h2>Our collections</h2></div><p>Personal pieces for every person<br/>and every moment of celebration.</p></div><div className="collection-grid shell">{collections.map(item=><article className={`collection-card ${item.tone}`} key={item.title}><div className="textile" aria-hidden="true"><span>✦</span></div><div className="card-copy"><span>{item.number}</span><h3>{item.title}</h3><p>{item.copy}</p><a href="#contact" aria-label={`Enquire about ${item.title}`}>Enquire <b>↗</b></a></div></article>)}</div></section>
-    <section className="process shell" id="process"><div><p className="section-kicker">The bespoke experience</p><h2>From first thought<br/>to final fitting.</h2></div><div className="steps">{steps.map(([n,t,c])=><div className="step" key={n}><span>{n}</span><div><h3>{t}</h3><p>{c}</p></div></div>)}</div></section>
-    <section className="contact" id="contact"><div className="contact-mark">RE</div><div className="contact-copy"><p className="section-kicker">Your story, beautifully worn</p><h2>Let’s create<br/>something <em>yours.</em></h2><p>Planning a wedding or dressing for a special event? Tell us what you have in mind and we’ll guide you from there.</p><a className="button light" href="mailto:hello@regalemboidery.in?subject=Custom%20design%20consultation">Book your consultation <span>↗</span></a><small>Online and in-person appointments available</small></div></section>
-    <footer className="footer shell"><a className="brand footer-brand" href="#top">RE <span>Regal<br/>Embroidery</span></a><div><p>Custom Indian occasionwear<br/>crafted for modern celebrations.</p><a href="mailto:hello@regalemboidery.in">hello@regalemboidery.in</a></div><div><a href="#collections">Collections</a><a href="#process">Our process</a><a href="#contact">Appointments</a></div><div><p>© 2026 Regal Embroidery</p><p>regalemboidery.in</p></div></footer>
-  </main>;
+  const [cart, setCart] = useState<number[]>([]);
+  const [cartOpen, setCartOpen] = useState(false);
+  const [filter, setFilter] = useState('All');
+  const visibleProducts = filter === 'All' ? products : products.filter((product) => product.category === filter);
+  const cartProducts = useMemo(() => cart.map((id) => products.find((product) => product.id === id)!), [cart]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('revealed')), { threshold: .12 });
+    document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
+    const onScroll = () => document.documentElement.style.setProperty('--scroll-y', `${Math.min(window.scrollY, 620)}px`);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => { observer.disconnect(); window.removeEventListener('scroll', onScroll); };
+  }, []);
+
+  useEffect(() => {
+    document.body.style.overflow = cartOpen ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [cartOpen]);
+
+  const addToCart = (id: number) => {
+    setCart((current) => [...current, id]);
+    setCartOpen(true);
+  };
+
+  const checkoutHref = `mailto:hello@regalembroidery.in?subject=${encodeURIComponent('Regal Embroidery order enquiry')}&body=${encodeURIComponent(`Hello, I would like to order:\n\n${cartProducts.map((product) => `• ${product.name} — ₹7,000`).join('\n')}\n\nTotal: ₹${(cart.length * 7000).toLocaleString('en-IN')}\n\nPlease share fitting and delivery details.`)}`;
+
+  return (
+    <main id="top">
+      <div className="announcement">Complimentary shipping across India on orders above ₹5,000</div>
+      <nav className="shop-nav shell" aria-label="Main navigation">
+        <a className="shop-brand" href="#top"><span>र</span><b>Regal Embroidery</b><small>Karigari · Shaadi · Jashn</small></a>
+        <div className="shop-links"><a href="#new">New arrivals</a><a href="#shop">Lehengas</a><a href="#story">Our karigari</a></div>
+        <button className="bag-button" type="button" aria-label="Open shopping bag" onClick={() => setCartOpen(true)}>Bag <span>{cart.length}</span></button>
+      </nav>
+
+      <section className="shop-hero">
+        <div className="hero-sun" aria-hidden="true">✦</div>
+        <div className="hero-words"><span>शादी</span><span>जश्न</span><span>इश्क़</span></div>
+        <div className="hero-product hero-product-left"><img src="/products/jamuni.jpeg" alt="Royal plum embroidered lehenga" /></div>
+        <div className="hero-product hero-product-main"><img src="/products/laal.jpeg" alt="Bridal red embroidered lehenga" /></div>
+        <div className="hero-product hero-product-right"><img src="/products/gulabi-pink.jpeg" alt="Pink embroidered lehenga" /></div>
+        <div className="hero-message">
+          <p className="eyebrow">Regal Shaadi Edit · 2026</p>
+          <h1>Har jashn,<br/><em>thoda aur regal.</em></h1>
+          <p>Hand-embroidered lehengas made for the music, colour and beautiful chaos of an Indian celebration.</p>
+          <a className="primary-cta" href="#shop">Shop the collection <span>↓</span></a>
+        </div>
+        <div className="hero-scroll"><span></span> Scroll to discover</div>
+      </section>
+
+      <section className="marquee" aria-label="Brand values"><div>Hand embroidered ✦ Made in India ✦ Shaadi ready ✦ Custom fitting available ✦ Hand embroidered ✦ Made in India ✦ Shaadi ready ✦</div></section>
+
+      <section className="shop-intro shell" id="new" data-reveal>
+        <p className="section-label">Nayi collection</p>
+        <h2>Made for every<br/><em>main character.</em></h2>
+        <p>Statement silhouettes, generous ghera and hand-done zari—pieces that arrive ready to become part of your favourite memories.</p>
+      </section>
+
+      <section className="product-section shell" id="shop">
+        <div className="product-toolbar"><p>{visibleProducts.length} heirloom pieces</p><div>{['All','Lehengas','Sharara'].map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
+        <div className="product-grid">
+          {visibleProducts.map((product, index) => (
+            <article className="product-card" key={product.id} data-reveal style={{'--delay': `${(index % 4) * 70}ms`} as React.CSSProperties}>
+              <a className="product-image" href="#shop" aria-label={`View ${product.name}`}><img src={product.image} alt={product.name}/><span className="piece-number">0{product.id}</span><span className="quick-view">View details</span></a>
+              <div className="product-info"><div><p>{product.colour}</p><h3>{product.name}</h3><strong>₹7,000</strong></div><button type="button" aria-label={`Add ${product.name} to bag`} onClick={() => addToCart(product.id)}>+</button></div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      <section className="story-strip" id="story"><div className="story-photo"><img src="/products/coral.jpeg" alt="Coral hand embroidered lehenga"/></div><div className="story-copy"><p className="section-label">Dil se, haath se</p><h2>Karigari that<br/>takes its <em>time.</em></h2><p>From the first chalk line to the last hand-finished tassel, every Regal piece celebrates the patience and precision of Indian craft.</p><a href="#shop">Meet the collection <span>→</span></a></div><div className="story-motif" aria-hidden="true">र</div></section>
+
+      <section className="service-row shell"><div><span>01</span><h3>Custom fitting</h3><p>Made to your measurements</p></div><div><span>02</span><h3>India-wide delivery</h3><p>Carefully packed & tracked</p></div><div><span>03</span><h3>Personal styling</h3><p>Talk to us before you order</p></div></section>
+
+      <footer className="shop-footer"><div className="shell footer-top"><div><a className="footer-logo" href="#top">Regal Embroidery</a><p>For shaadis, sangeets and all the stories in between.</p></div><div><b>Shop</b><a href="#shop">New arrivals</a><a href="#shop">Lehengas</a><a href="#shop">Wedding edit</a></div><div><b>Help</b><a href="mailto:hello@regalembroidery.in">Contact us</a><a href="#story">Our story</a><a href="#shop">Shipping</a></div><div><b>Stay in the loop</b><p>New drops, styling notes and a little shaadi sparkle.</p><a className="email-link" href="mailto:hello@regalembroidery.in">hello@regalembroidery.in ↗</a></div></div><div className="shell footer-bottom"><span>© 2026 Regal Embroidery</span><span>Made with mohabbat in India</span><span>regalembroidery.in</span></div></footer>
+
+      <button className={`cart-backdrop ${cartOpen ? 'open' : ''}`} aria-label="Close shopping bag" onClick={() => setCartOpen(false)} />
+      <aside className={`cart-drawer ${cartOpen ? 'open' : ''}`} aria-label="Shopping bag" aria-hidden={!cartOpen}>
+        <div className="cart-head"><div><p>Your shopping bag</p><h2>{cart.length ? `${cart.length} ${cart.length === 1 ? 'piece' : 'pieces'}` : 'Abhi khaali hai'}</h2></div><button onClick={() => setCartOpen(false)} aria-label="Close shopping bag">×</button></div>
+        <div className="cart-items">
+          {cart.length === 0 ? <div className="empty-cart"><span>र</span><p>Your celebration look is waiting.</p><button onClick={() => { setCartOpen(false); document.querySelector('#shop')?.scrollIntoView(); }}>Explore the collection</button></div> : cartProducts.map((product, index) => <div className="cart-item" key={`${product.id}-${index}`}><img src={product.image} alt=""/><div><small>{product.colour}</small><h3>{product.name}</h3><strong>₹7,000</strong><button onClick={() => setCart((current) => current.filter((_, itemIndex) => itemIndex !== index))}>Remove</button></div></div>)}
+        </div>
+        {cart.length > 0 && <div className="cart-summary"><div><span>Subtotal</span><strong>₹{(cart.length * 7000).toLocaleString('en-IN')}</strong></div><p>Fitting and delivery details will be confirmed personally.</p><a href={checkoutHref}>Send order enquiry <span>↗</span></a></div>}
+      </aside>
+    </main>
+  );
 }
