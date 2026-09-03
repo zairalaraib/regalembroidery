@@ -51,16 +51,14 @@ export default function Home() {
       </nav>
 
       <section className="shop-hero">
-        <div className="hero-sun" aria-hidden="true">✦</div>
-        <div className="hero-words"><span>शादी</span><span>जश्न</span><span>इश्क़</span></div>
-        <div className="hero-product hero-product-left"><img src="/products/jamuni.jpeg" alt="Royal plum embroidered lehenga" /></div>
-        <div className="hero-product hero-product-main"><img src="/products/laal.jpeg" alt="Bridal red embroidered lehenga" /></div>
-        <div className="hero-product hero-product-right"><img src="/products/gulabi-pink.jpeg" alt="Pink embroidered lehenga" /></div>
+        <div className="hero-frame" aria-hidden="true"><span></span><b>र</b><span></span></div>
+        <p className="hero-side-note hero-side-left">Indian occasionwear · Est. 2026</p>
+        <p className="hero-side-note hero-side-right">Designed with intention · Made with patience</p>
         <div className="hero-message">
-          <p className="eyebrow">Regal Shaadi Edit · 2026</p>
-          <h1>Har jashn,<br/><em>thoda aur regal.</em></h1>
-          <p>Hand-embroidered lehengas made for the music, colour and beautiful chaos of an Indian celebration.</p>
-          <a className="primary-cta" href="#shop">Shop the collection <span>↓</span></a>
+          <p className="eyebrow">An ode to Indian occasionwear</p>
+          <h1>Draped in tradition.<br/><em>Made to be remembered.</em></h1>
+          <p>Considered silhouettes and intricate hand embroidery for weddings, celebrations and every beautiful moment in between.</p>
+          <a className="primary-cta" href="#shop">Discover the collection <span>↓</span></a>
         </div>
         <div className="hero-scroll"><span></span> Scroll to discover</div>
       </section>
