@@ -35,6 +35,7 @@ const products = [
   { id: 30, name: 'Velvet Bolster & Panel Set', colour: 'Maroon velvet', image: '/products/collection/velvet-bolster-set.jpeg', category: 'Bespoke Work' },
   { id: 31, name: 'Calligraphy Celebration Ornaments', colour: 'Jewel tones & gold', image: '/products/collection/calligraphy-ornaments.jpeg', category: 'Bespoke Work' },
   { id: 32, name: 'Velvet Cushion Set', colour: 'Maroon & gold', image: '/products/collection/velvet-cushion-set.jpeg', category: 'Bespoke Work' },
+  { id: 33, name: 'Bridal Runway Inspiration', colour: 'Deep bridal red', image: '/products/collection/bridal-inspiration-edit.jpeg', category: 'Inspiration Edit' },
 ];
 
 export default function Home() {
@@ -96,7 +97,7 @@ export default function Home() {
       </section>
 
       <section className="product-section shell" id="shop">
-        <div className="product-toolbar"><p>{visibleProducts.length} heirloom pieces</p><div>{['All','Lehengas','Sharara Sets','Bespoke Work'].map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
+        <div className="product-toolbar"><p>{visibleProducts.length} heirloom pieces</p><div>{['All','Lehengas','Sharara Sets','Bespoke Work','Inspiration Edit'].map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
         <div className="product-grid">
           {visibleProducts.map((product, index) => (
             <article className="product-card" key={product.id} data-reveal style={{'--delay': `${(index % 4) * 70}ms`} as React.CSSProperties}>
