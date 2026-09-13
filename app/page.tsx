@@ -6,11 +6,35 @@ const products = [
   { id: 1, name: 'Gulabo Rose Lehenga', colour: 'Rose pink', image: '/products/rose-pink.jpeg', category: 'Lehengas' },
   { id: 2, name: 'Rani Bagh Lehenga', colour: 'Rani red', image: '/products/rani-red.jpeg', category: 'Lehengas' },
   { id: 3, name: 'Gulabi Sitara Lehenga', colour: 'Gulabi pink', image: '/products/gulabi-pink.jpeg', category: 'Lehengas' },
-  { id: 4, name: 'Mehroon Zari Sharara', colour: 'Deep maroon', image: '/products/mehroon.jpeg', category: 'Sharara' },
+  { id: 4, name: 'Mehroon Zari Sharara', colour: 'Deep maroon', image: '/products/mehroon.jpeg', category: 'Sharara Sets' },
   { id: 5, name: 'Genda Phool Lehenga', colour: 'Coral orange', image: '/products/coral.jpeg', category: 'Lehengas' },
   { id: 6, name: 'Gulab Noor Lehenga', colour: 'Pink & ivory', image: '/products/gulab-ivory.jpeg', category: 'Lehengas' },
   { id: 7, name: 'Jamuni Jaal Lehenga', colour: 'Royal plum', image: '/products/jamuni.jpeg', category: 'Lehengas' },
   { id: 8, name: 'Laal Ishq Lehenga', colour: 'Bridal red', image: '/products/laal.jpeg', category: 'Lehengas' },
+  { id: 9, name: 'Emerald Noor Lehenga', colour: 'Emerald green', image: '/products/collection/emerald-noor-lehenga.jpeg', category: 'Lehengas' },
+  { id: 10, name: 'Rose Meher Lehenga', colour: 'Dusty rose', image: '/products/collection/rose-meher-lehenga.jpeg', category: 'Lehengas' },
+  { id: 11, name: 'Rangrez Dual-Tone Lehenga', colour: 'Emerald & fuchsia', image: '/products/collection/rangrez-dual-lehenga.jpeg', category: 'Lehengas' },
+  { id: 12, name: 'Jamuni Gulab Lehenga', colour: 'Royal purple & pink', image: '/products/collection/jamuni-gulab-lehenga.jpeg', category: 'Lehengas' },
+  { id: 13, name: 'Surkh Bagh Lehenga', colour: 'Bridal red', image: '/products/collection/surkh-bagh-lehenga.jpeg', category: 'Lehengas' },
+  { id: 14, name: 'Mehrun Gulab Lehenga', colour: 'Maroon & rose', image: '/products/collection/mehrun-gulab-lehenga.jpeg', category: 'Lehengas' },
+  { id: 15, name: 'Basanti Gulab Lehenga', colour: 'Marigold & fuchsia', image: '/products/collection/basanti-gulab-lehenga.jpeg', category: 'Lehengas' },
+  { id: 16, name: 'Feroza Rani Sharara', colour: 'Turquoise & rani pink', image: '/products/collection/feroza-rani-sharara.jpeg', category: 'Sharara Sets' },
+  { id: 17, name: 'Feroza Karigari Sharara', colour: 'Turquoise & gold', image: '/products/collection/feroza-karigari-sharara.jpeg', category: 'Sharara Sets' },
+  { id: 18, name: 'Mehrun Zar Sharara', colour: 'Maroon & antique gold', image: '/products/collection/mehrun-zar-sharara.jpeg', category: 'Sharara Sets' },
+  { id: 19, name: 'Mehrun Velvet Border Panel', colour: 'Maroon velvet', image: '/products/collection/velvet-border-panel.jpeg', category: 'Bespoke Work' },
+  { id: 20, name: 'Surkh Floral Karigari', colour: 'Red & antique gold', image: '/products/collection/surkh-floral-karigari.jpeg', category: 'Bespoke Work' },
+  { id: 21, name: 'Mehrun Floral Panel', colour: 'Maroon velvet', image: '/products/collection/velvet-floral-panel.jpeg', category: 'Bespoke Work' },
+  { id: 22, name: 'Surkh Jaal Embroidered Fabric', colour: 'Crimson & gold', image: '/products/collection/surkh-jaal-fabric.jpeg', category: 'Bespoke Work' },
+  { id: 23, name: 'Velvet Calligraphy Banner', colour: 'Maroon & gold', image: '/products/collection/velvet-calligraphy-banner.jpeg', category: 'Bespoke Work' },
+  { id: 24, name: 'Blush Mint Embroidered Border', colour: 'Blush & mint', image: '/products/collection/blush-mint-border.jpeg', category: 'Bespoke Work' },
+  { id: 25, name: 'Blush Mint Jaal Fabric', colour: 'Blush & mint', image: '/products/collection/blush-mint-jaal.jpeg', category: 'Bespoke Work' },
+  { id: 26, name: 'Velvet Paisley Karigari', colour: 'Maroon velvet', image: '/products/collection/velvet-paisley-work.jpeg', category: 'Bespoke Work' },
+  { id: 27, name: 'Ivory Meena Embroidered Fabric', colour: 'Ivory, green & pink', image: '/products/collection/ivory-meena-border.jpeg', category: 'Bespoke Work' },
+  { id: 28, name: 'Velvet Dua Wall Hanging', colour: 'Maroon & gold', image: '/products/collection/velvet-wall-hanging.jpeg', category: 'Bespoke Work' },
+  { id: 29, name: 'Round Velvet Celebration Mat', colour: 'Maroon & gold', image: '/products/collection/round-velvet-mat.jpeg', category: 'Bespoke Work' },
+  { id: 30, name: 'Velvet Bolster & Panel Set', colour: 'Maroon velvet', image: '/products/collection/velvet-bolster-set.jpeg', category: 'Bespoke Work' },
+  { id: 31, name: 'Calligraphy Celebration Ornaments', colour: 'Jewel tones & gold', image: '/products/collection/calligraphy-ornaments.jpeg', category: 'Bespoke Work' },
+  { id: 32, name: 'Velvet Cushion Set', colour: 'Maroon & gold', image: '/products/collection/velvet-cushion-set.jpeg', category: 'Bespoke Work' },
 ];
 
 export default function Home() {
@@ -72,12 +96,12 @@ export default function Home() {
       </section>
 
       <section className="product-section shell" id="shop">
-        <div className="product-toolbar"><p>{visibleProducts.length} heirloom pieces</p><div>{['All','Lehengas','Sharara'].map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
+        <div className="product-toolbar"><p>{visibleProducts.length} heirloom pieces</p><div>{['All','Lehengas','Sharara Sets','Bespoke Work'].map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
         <div className="product-grid">
           {visibleProducts.map((product, index) => (
             <article className="product-card" key={product.id} data-reveal style={{'--delay': `${(index % 4) * 70}ms`} as React.CSSProperties}>
-              <a className="product-image" href="#shop" aria-label={`View ${product.name}`}><img src={product.image} alt={product.name}/><span className="piece-number">0{product.id}</span><span className="quick-view">View details</span></a>
-              <div className="product-info"><div><p>{product.colour}</p><h3>{product.name}</h3><strong>₹7,000</strong></div><button type="button" aria-label={`Add ${product.name} to bag`} onClick={() => addToCart(product.id)}>+</button></div>
+              <a className="product-image" href="#shop" aria-label={`View ${product.name}`}><img src={product.image} alt={product.name}/><span className="piece-number">{String(product.id).padStart(2, '0')}</span><span className="quick-view">View details</span></a>
+              <div className="product-info"><div><p>{product.category} · {product.colour}</p><h3>{product.name}</h3><strong>₹7,000</strong></div><button type="button" aria-label={`Add ${product.name} to bag`} onClick={() => addToCart(product.id)}>+</button></div>
             </article>
           ))}
         </div>
