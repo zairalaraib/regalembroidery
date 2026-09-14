@@ -1,31 +1,8 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
-
-const products = [
-  { id: 1, name: 'Gulabo Rose Lehenga', colour: 'Rose pink', image: '/products/rose-pink.jpeg', category: 'Lehengas' },
-  { id: 2, name: 'Rani Bagh Lehenga', colour: 'Rani red', image: '/products/rani-red.jpeg', category: 'Lehengas' },
-  { id: 3, name: 'Gulabi Sitara Lehenga', colour: 'Gulabi pink', image: '/products/gulabi-pink.jpeg', category: 'Lehengas' },
-  { id: 4, name: 'Mehroon Zari Sharara', colour: 'Deep maroon', image: '/products/mehroon.jpeg', category: 'Sharara Sets' },
-  { id: 5, name: 'Genda Phool Lehenga', colour: 'Coral orange', image: '/products/coral.jpeg', category: 'Lehengas' },
-  { id: 6, name: 'Gulab Noor Lehenga', colour: 'Pink & ivory', image: '/products/gulab-ivory.jpeg', category: 'Lehengas' },
-  { id: 7, name: 'Jamuni Jaal Lehenga', colour: 'Royal plum', image: '/products/jamuni.jpeg', category: 'Lehengas' },
-  { id: 8, name: 'Laal Ishq Lehenga', colour: 'Bridal red', image: '/products/laal.jpeg', category: 'Lehengas' },
-  { id: 9, name: 'Emerald Noor Lehenga', colour: 'Emerald green', image: '/products/collection/emerald-noor-lehenga.jpeg', category: 'Lehengas' },
-  { id: 10, name: 'Rose Meher Lehenga', colour: 'Dusty rose', image: '/products/collection/rose-meher-lehenga.jpeg', category: 'Lehengas' },
-  { id: 11, name: 'Rangrez Dual-Tone Lehenga', colour: 'Emerald & fuchsia', image: '/products/collection/rangrez-dual-lehenga.jpeg', category: 'Lehengas' },
-  { id: 12, name: 'Jamuni Gulab Lehenga', colour: 'Royal purple & pink', image: '/products/collection/jamuni-gulab-lehenga.jpeg', category: 'Lehengas' },
-  { id: 13, name: 'Surkh Bagh Lehenga', colour: 'Bridal red', image: '/products/collection/surkh-bagh-lehenga.jpeg', gallery: ['/products/collection/surkh-bagh-lehenga.jpeg', '/products/collection/surkh-floral-karigari.jpeg', '/products/collection/surkh-jaal-fabric.jpeg'], category: 'Lehengas' },
-  { id: 14, name: 'Mehrun Gulab Lehenga', colour: 'Maroon & rose', image: '/products/collection/mehrun-gulab-lehenga.jpeg', category: 'Lehengas' },
-  { id: 15, name: 'Basanti Gulab Lehenga', colour: 'Marigold & fuchsia', image: '/products/collection/basanti-gulab-lehenga.jpeg', category: 'Lehengas' },
-  { id: 16, name: 'Feroza Rani Sharara', colour: 'Turquoise & rani pink', image: '/products/collection/feroza-rani-sharara.jpeg', gallery: ['/products/collection/feroza-rani-sharara.jpeg', '/products/collection/feroza-karigari-sharara.jpeg'], category: 'Sharara Sets' },
-  { id: 18, name: 'Mehrun Zar Sharara', colour: 'Maroon & antique gold', image: '/products/collection/mehrun-zar-sharara.jpeg', category: 'Sharara Sets' },
-  { id: 19, name: 'Mehrun Velvet Bedding Set', colour: 'Maroon velvet', image: '/products/collection/velvet-cushion-set.jpeg', gallery: ['/products/collection/velvet-cushion-set.jpeg', '/products/collection/velvet-border-panel.jpeg', '/products/collection/velvet-bolster-set.jpeg', '/products/collection/velvet-floral-panel.jpeg', '/products/collection/velvet-paisley-work.jpeg', '/products/collection/round-velvet-mat.jpeg'], category: 'Cushions & Pillows' },
-  { id: 23, name: 'Velvet Calligraphy Wall Hanging Set', colour: 'Jewel tones & gold', image: '/products/collection/velvet-calligraphy-banner.jpeg', gallery: ['/products/collection/velvet-calligraphy-banner.jpeg', '/products/collection/velvet-wall-hanging.jpeg', '/products/collection/calligraphy-ornaments.jpeg'], category: 'Wall Hangings' },
-  { id: 24, name: 'Blush Mint Embroidered Bedsheet', colour: 'Blush & mint', image: '/products/collection/blush-mint-border.jpeg', gallery: ['/products/collection/blush-mint-border.jpeg', '/products/collection/blush-mint-jaal.jpeg'], category: 'Bedsheets' },
-  { id: 27, name: 'Ivory Meena Embroidered Bedsheet', colour: 'Ivory, green & pink', image: '/products/collection/ivory-meena-border.jpeg', category: 'Bedsheets' },
-  { id: 33, name: 'Bridal Runway Inspiration', colour: 'Deep bridal red', image: '/products/collection/bridal-inspiration-edit.jpeg', category: 'Inspiration Edit' },
-];
+import Link from 'next/link';
+import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import { modelProducts, productCategories, products, whatsappUrl } from '@/app/lib/products';
 
 export default function Home() {
   const [cart, setCart] = useState<number[]>([]);
@@ -33,15 +10,12 @@ export default function Home() {
   const [filter, setFilter] = useState('All');
   const [imageIndexes, setImageIndexes] = useState<Record<number, number>>({});
   const visibleProducts = filter === 'All' ? products : products.filter((product) => product.category === filter);
-  const cartProducts = useMemo(() => cart.map((id) => products.find((product) => product.id === id)!), [cart]);
+  const cartProducts = useMemo(() => cart.map((id) => products.find((product) => product.id === id)!).filter(Boolean), [cart]);
 
   useEffect(() => {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('revealed')), { threshold: .12 });
     document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
-    const onScroll = () => document.documentElement.style.setProperty('--scroll-y', `${Math.min(window.scrollY, 620)}px`);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-    return () => { observer.disconnect(); window.removeEventListener('scroll', onScroll); };
+    return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
@@ -49,72 +23,63 @@ export default function Home() {
     return () => { document.body.style.overflow = ''; };
   }, [cartOpen]);
 
-  const addToCart = (id: number) => {
-    setCart((current) => [...current, id]);
-    setCartOpen(true);
-  };
-
-  const checkoutHref = `mailto:hello@regalembroidery.in?subject=${encodeURIComponent('Regal Embroidery order enquiry')}&body=${encodeURIComponent(`Hello, I would like to order:\n\n${cartProducts.map((product) => `• ${product.name} — ₹7,000`).join('\n')}\n\nTotal: ₹${(cart.length * 7000).toLocaleString('en-IN')}\n\nPlease share fitting and delivery details.`)}`;
+  const addToBag = (id: number) => { setCart((current) => [...current, id]); setCartOpen(true); };
+  const orderText = `Hello Regal Embroidery, I would like to enquire about:\n\n${cartProducts.map((product) => `• ${product.name} — ₹${product.price.toLocaleString('en-IN')}`).join('\n')}\n\nPlease share availability, fitting and delivery details.`;
+  const checkoutHref = `https://wa.me/919308074781?text=${encodeURIComponent(orderText)}`;
 
   return (
     <main id="top">
       <div className="announcement">Complimentary shipping across India on orders above ₹5,000</div>
       <nav className="shop-nav shell" aria-label="Main navigation">
         <a className="shop-brand" href="#top"><span>र</span><b>Regal Embroidery</b><small>Karigari · Shaadi · Jashn</small></a>
-        <div className="shop-links"><a href="#new">New arrivals</a><a href="#shop">Lehengas</a><a href="#story">Our karigari</a></div>
+        <div className="shop-links"><a href="#edit">The edit</a><a href="#shop">Collection</a><a href="#story">Our karigari</a></div>
         <button className="bag-button" type="button" aria-label="Open shopping bag" onClick={() => setCartOpen(true)}>Bag <span>{cart.length}</span></button>
       </nav>
 
       <section className="shop-hero">
-        <div className="hero-frame" aria-hidden="true"><span></span><b>र</b><span></span></div>
+        <div className="hero-frame" aria-hidden="true"><span /><b>र</b><span /></div>
         <p className="hero-side-note hero-side-left">Indian occasionwear · Est. 2026</p>
         <p className="hero-side-note hero-side-right">Designed with intention · Made with patience</p>
-        <div className="hero-message">
-          <p className="eyebrow">An ode to Indian occasionwear</p>
-          <h1>Draped in tradition.<br/><em>Made to be remembered.</em></h1>
-          <p>Considered silhouettes and intricate hand embroidery for weddings, celebrations and every beautiful moment in between.</p>
-          <a className="primary-cta" href="#shop">Discover the collection <span>↓</span></a>
-        </div>
-        <div className="hero-scroll"><span></span> Scroll to discover</div>
+        <div className="hero-message"><p className="eyebrow">An ode to Indian occasionwear</p><h1>Draped in tradition.<br /><em>Made to be remembered.</em></h1><p>Considered silhouettes and intricate hand embroidery for weddings, celebrations and every beautiful moment in between.</p><a className="primary-cta" href="#shop">Discover the collection <span>↓</span></a></div>
+        <div className="hero-scroll"><span /> Scroll to discover</div>
       </section>
 
       <section className="marquee" aria-label="Brand values"><div>Hand embroidered ✦ Made in India ✦ Shaadi ready ✦ Custom fitting available ✦ Hand embroidered ✦ Made in India ✦ Shaadi ready ✦</div></section>
 
-      <section className="shop-intro shell" id="new" data-reveal>
-        <p className="section-label">Nayi collection</p>
-        <h2>Made for every<br/><em>main character.</em></h2>
-        <p>Statement silhouettes, generous ghera and hand-done zari—pieces that arrive ready to become part of your favourite memories.</p>
+      <section className="shop-intro shell" id="edit" data-reveal><p className="section-label">Nayi collection</p><h2>Made for every<br /><em>main character.</em></h2><p>Statement silhouettes, generous ghera and hand-done zari—pieces that arrive ready to become part of your favourite memories.</p></section>
+
+      <section className="model-edit shell" aria-labelledby="occasion-edit-title" data-reveal>
+        <div className="model-edit-heading"><p className="section-label">The occasion edit</p><h2 id="occasion-edit-title">Three ways to make an entrance.</h2></div>
+        <div className="model-grid">
+          {modelProducts.map((product) => <article className="model-card" key={product.id}><Link href={`/products/${product.slug}`}><img src={product.image} alt={product.name} width="900" height="1200" loading="eager" /><div><p>{product.category} · {product.colour}</p><h3>{product.name}</h3><strong>₹{product.price.toLocaleString('en-IN')}</strong></div></Link><a className="model-whatsapp" href={whatsappUrl(product)} target="_blank" rel="noreferrer">Chat on WhatsApp <span>↗</span></a></article>)}
+        </div>
       </section>
 
       <section className="product-section shell" id="shop">
-        <div className="product-toolbar"><p>{visibleProducts.length} handcrafted pieces</p><div>{['All','Lehengas','Sharara Sets','Bedsheets','Cushions & Pillows','Wall Hangings','Inspiration Edit'].map((item) => <button type="button" key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
+        <div className="product-toolbar"><p>{visibleProducts.length} handcrafted pieces</p><div>{productCategories.map((item) => <button type="button" key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
         <div className="product-grid">
           {visibleProducts.map((product, index) => {
-            const images = product.gallery ?? [product.image];
             const activeImage = imageIndexes[product.id] ?? 0;
-            return (
-            <article className="product-card" key={product.id} data-reveal style={{'--delay': `${(index % 4) * 70}ms`} as React.CSSProperties}>
-              <div className="product-image"><img src={images[activeImage]} alt={`${product.name}, view ${activeImage + 1} of ${images.length}`} width="900" height="1200" loading={index < 4 ? 'eager' : 'lazy'} decoding="async"/><span className="piece-number">{String(product.id).padStart(2, '0')}</span>{images.length > 1 && <><button className="gallery-arrow gallery-prev" type="button" aria-label={`Previous photo of ${product.name}`} onClick={() => setImageIndexes((current) => ({...current, [product.id]: (activeImage - 1 + images.length) % images.length}))}>‹</button><button className="gallery-arrow gallery-next" type="button" aria-label={`Next photo of ${product.name}`} onClick={() => setImageIndexes((current) => ({...current, [product.id]: (activeImage + 1) % images.length}))}>›</button><div className="gallery-dots" aria-label={`${images.length} product photos`}>{images.map((_, imageIndex) => <button type="button" key={imageIndex} className={imageIndex === activeImage ? 'active' : ''} aria-label={`Show photo ${imageIndex + 1} of ${product.name}`} onClick={() => setImageIndexes((current) => ({...current, [product.id]: imageIndex}))}/>)}</div></>}</div>
-              <div className="product-info"><div><p>{product.category} · {product.colour}</p><h3>{product.name}</h3><strong>₹7,000</strong></div><button type="button" aria-label={`Add ${product.name} to bag`} onClick={() => addToCart(product.id)}>+</button></div>
-            </article>
-          )})}
+            return <article className="product-card" key={product.id} data-reveal style={{ '--delay': `${(index % 4) * 70}ms` } as CSSProperties}>
+              <div className="product-image">
+                <Link className="product-image-link" href={`/products/${product.slug}`} aria-label={`View ${product.name}`}><img src={product.gallery[activeImage]} alt={`${product.name}, view ${activeImage + 1} of ${product.gallery.length}`} width="900" height="1200" loading={index < 4 ? 'eager' : 'lazy'} decoding="async" /></Link>
+                <span className="piece-number">{String(product.id).padStart(2, '0')}</span>
+                {product.gallery.length > 1 && <><button className="gallery-arrow gallery-prev" type="button" aria-label={`Previous photo of ${product.name}`} onClick={() => setImageIndexes((current) => ({ ...current, [product.id]: (activeImage - 1 + product.gallery.length) % product.gallery.length }))}>‹</button><button className="gallery-arrow gallery-next" type="button" aria-label={`Next photo of ${product.name}`} onClick={() => setImageIndexes((current) => ({ ...current, [product.id]: (activeImage + 1) % product.gallery.length }))}>›</button><div className="gallery-dots" aria-label={`${product.gallery.length} product photos`}>{product.gallery.map((_, photoIndex) => <button type="button" key={photoIndex} className={photoIndex === activeImage ? 'active' : ''} aria-label={`Show photo ${photoIndex + 1} of ${product.name}`} onClick={() => setImageIndexes((current) => ({ ...current, [product.id]: photoIndex }))} />)}</div></>}
+              </div>
+              <div className="product-info"><div><p>{product.category} · {product.colour}</p><h3>{product.name}</h3><strong>₹{product.price.toLocaleString('en-IN')}</strong><div className="product-actions"><Link href={`/products/${product.slug}`}>View piece</Link><a href={whatsappUrl(product)} target="_blank" rel="noreferrer">WhatsApp</a></div></div><button type="button" aria-label={`Add ${product.name} to bag`} onClick={() => addToBag(product.id)}>+</button></div>
+            </article>;
+          })}
         </div>
       </section>
 
-      <section className="story-strip" id="story"><div className="story-photo"><img src="/products/coral.jpeg" alt="Coral hand embroidered lehenga"/></div><div className="story-copy"><p className="section-label">Dil se, haath se</p><h2>Karigari that<br/>takes its <em>time.</em></h2><p>From the first chalk line to the last hand-finished tassel, every Regal piece celebrates the patience and precision of Indian craft.</p><a href="#shop">Meet the collection <span>→</span></a></div><div className="story-motif" aria-hidden="true">र</div></section>
+      <section className="story-strip" id="story"><div className="story-photo"><img src="/products/coral.jpeg" alt="Coral hand embroidered lehenga" /></div><div className="story-copy"><p className="section-label">Dil se, haath se</p><h2>Karigari that<br />takes its <em>time.</em></h2><p>From the first chalk line to the last hand-finished tassel, every Regal piece celebrates the patience and precision of Indian craft.</p><a href="#shop">Meet the collection <span>→</span></a></div><div className="story-motif" aria-hidden="true">र</div></section>
 
-      <section className="service-row shell"><div><span>01</span><h3>Custom fitting</h3><p>Made to your measurements</p></div><div><span>02</span><h3>India-wide delivery</h3><p>Carefully packed & tracked</p></div><div><span>03</span><h3>Personal styling</h3><p>Talk to us before you order</p></div></section>
+      <section className="service-row shell"><div><span>01</span><h3>Custom fitting</h3><p>Made to your measurements</p></div><div><span>02</span><h3>India-wide delivery</h3><p>Carefully packed &amp; tracked</p></div><div><span>03</span><h3>Personal styling</h3><p>Talk to us before you order</p></div></section>
 
-      <footer className="shop-footer"><div className="shell footer-top"><div><a className="footer-logo" href="#top">Regal Embroidery</a><p>For shaadis, sangeets and all the stories in between.</p></div><div><b>Shop</b><a href="#shop">New arrivals</a><a href="#shop">Lehengas</a><a href="#shop">Wedding edit</a></div><div><b>Help</b><a href="mailto:hello@regalembroidery.in">Contact us</a><a href="#story">Our story</a><a href="#shop">Shipping</a></div><div><b>Stay in the loop</b><p>New drops, styling notes and a little shaadi sparkle.</p><a className="email-link" href="mailto:hello@regalembroidery.in">hello@regalembroidery.in ↗</a></div></div><div className="shell footer-bottom"><span>© 2026 Regal Embroidery</span><span>Made with mohabbat in India</span><span>regalembroidery.in</span></div></footer>
+      <footer className="shop-footer"><div className="shell footer-top"><div><a className="footer-logo" href="#top">Regal Embroidery</a><p>For shaadis, sangeets and all the stories in between.</p></div><div><b>Shop</b><a href="#shop">Collection</a><a href="#shop">Lehengas</a><a href="#shop">Wedding trousseau</a></div><div><b>Help</b><a href="https://wa.me/919308074781" target="_blank" rel="noreferrer">Chat on WhatsApp</a><a href="#story">Our story</a><a href="#shop">Shipping</a></div><div><b>Stay in the loop</b><p>New drops, styling notes and a little shaadi sparkle.</p><a className="email-link" href="https://wa.me/919308074781" target="_blank" rel="noreferrer">+91 93080 74781 ↗</a></div></div><div className="shell footer-bottom"><span>© 2026 Regal Embroidery</span><span>Made with mohabbat in India</span><span>regalembroidery.in</span></div></footer>
 
       <button className={`cart-backdrop ${cartOpen ? 'open' : ''}`} aria-label="Close shopping bag" onClick={() => setCartOpen(false)} />
-      <aside className={`cart-drawer ${cartOpen ? 'open' : ''}`} aria-label="Shopping bag" aria-hidden={!cartOpen}>
-        <div className="cart-head"><div><p>Your shopping bag</p><h2>{cart.length ? `${cart.length} ${cart.length === 1 ? 'piece' : 'pieces'}` : 'Abhi khaali hai'}</h2></div><button onClick={() => setCartOpen(false)} aria-label="Close shopping bag">×</button></div>
-        <div className="cart-items">
-          {cart.length === 0 ? <div className="empty-cart"><span>र</span><p>Your celebration look is waiting.</p><button onClick={() => { setCartOpen(false); document.querySelector('#shop')?.scrollIntoView(); }}>Explore the collection</button></div> : cartProducts.map((product, index) => <div className="cart-item" key={`${product.id}-${index}`}><img src={product.image} alt=""/><div><small>{product.colour}</small><h3>{product.name}</h3><strong>₹7,000</strong><button onClick={() => setCart((current) => current.filter((_, itemIndex) => itemIndex !== index))}>Remove</button></div></div>)}
-        </div>
-        {cart.length > 0 && <div className="cart-summary"><div><span>Subtotal</span><strong>₹{(cart.length * 7000).toLocaleString('en-IN')}</strong></div><p>Fitting and delivery details will be confirmed personally.</p><a href={checkoutHref}>Send order enquiry <span>↗</span></a></div>}
-      </aside>
+      <aside className={`cart-drawer ${cartOpen ? 'open' : ''}`} aria-label="Shopping bag" aria-hidden={!cartOpen}><div className="cart-head"><div><p>Your shopping bag</p><h2>{cart.length ? `${cart.length} ${cart.length === 1 ? 'piece' : 'pieces'}` : 'Abhi khaali hai'}</h2></div><button onClick={() => setCartOpen(false)} aria-label="Close shopping bag">×</button></div><div className="cart-items">{cart.length === 0 ? <div className="empty-cart"><span>र</span><p>Your celebration look is waiting.</p><button onClick={() => { setCartOpen(false); document.querySelector('#shop')?.scrollIntoView(); }}>Explore the collection</button></div> : cartProducts.map((product, index) => <div className="cart-item" key={`${product.id}-${index}`}><img src={product.image} alt="" /><div><small>{product.colour}</small><h3>{product.name}</h3><strong>₹{product.price.toLocaleString('en-IN')}</strong><button onClick={() => setCart((current) => current.filter((_, itemIndex) => itemIndex !== index))}>Remove</button></div></div>)}</div>{cart.length > 0 && <div className="cart-summary"><div><span>Subtotal</span><strong>₹{cartProducts.reduce((total, product) => total + product.price, 0).toLocaleString('en-IN')}</strong></div><p>Fitting and delivery details will be confirmed personally.</p><a href={checkoutHref} target="_blank" rel="noreferrer">Chat on WhatsApp <span>↗</span></a></div>}</aside>
     </main>
   );
 }
