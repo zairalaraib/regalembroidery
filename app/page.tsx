@@ -15,26 +15,15 @@ const products = [
   { id: 10, name: 'Rose Meher Lehenga', colour: 'Dusty rose', image: '/products/collection/rose-meher-lehenga.jpeg', category: 'Lehengas' },
   { id: 11, name: 'Rangrez Dual-Tone Lehenga', colour: 'Emerald & fuchsia', image: '/products/collection/rangrez-dual-lehenga.jpeg', category: 'Lehengas' },
   { id: 12, name: 'Jamuni Gulab Lehenga', colour: 'Royal purple & pink', image: '/products/collection/jamuni-gulab-lehenga.jpeg', category: 'Lehengas' },
-  { id: 13, name: 'Surkh Bagh Lehenga', colour: 'Bridal red', image: '/products/collection/surkh-bagh-lehenga.jpeg', category: 'Lehengas' },
+  { id: 13, name: 'Surkh Bagh Lehenga', colour: 'Bridal red', image: '/products/collection/surkh-bagh-lehenga.jpeg', gallery: ['/products/collection/surkh-bagh-lehenga.jpeg', '/products/collection/surkh-floral-karigari.jpeg', '/products/collection/surkh-jaal-fabric.jpeg'], category: 'Lehengas' },
   { id: 14, name: 'Mehrun Gulab Lehenga', colour: 'Maroon & rose', image: '/products/collection/mehrun-gulab-lehenga.jpeg', category: 'Lehengas' },
   { id: 15, name: 'Basanti Gulab Lehenga', colour: 'Marigold & fuchsia', image: '/products/collection/basanti-gulab-lehenga.jpeg', category: 'Lehengas' },
-  { id: 16, name: 'Feroza Rani Sharara', colour: 'Turquoise & rani pink', image: '/products/collection/feroza-rani-sharara.jpeg', category: 'Sharara Sets' },
-  { id: 17, name: 'Feroza Karigari Sharara', colour: 'Turquoise & gold', image: '/products/collection/feroza-karigari-sharara.jpeg', category: 'Sharara Sets' },
+  { id: 16, name: 'Feroza Rani Sharara', colour: 'Turquoise & rani pink', image: '/products/collection/feroza-rani-sharara.jpeg', gallery: ['/products/collection/feroza-rani-sharara.jpeg', '/products/collection/feroza-karigari-sharara.jpeg'], category: 'Sharara Sets' },
   { id: 18, name: 'Mehrun Zar Sharara', colour: 'Maroon & antique gold', image: '/products/collection/mehrun-zar-sharara.jpeg', category: 'Sharara Sets' },
-  { id: 19, name: 'Mehrun Velvet Bedsheet', colour: 'Maroon velvet', image: '/products/collection/velvet-border-panel.jpeg', category: 'Bedsheets' },
-  { id: 20, name: 'Surkh Floral Bedsheet', colour: 'Red & antique gold', image: '/products/collection/surkh-floral-karigari.jpeg', category: 'Bedsheets' },
-  { id: 21, name: 'Mehrun Velvet Pillow Cover', colour: 'Maroon velvet', image: '/products/collection/velvet-floral-panel.jpeg', category: 'Cushions & Pillows' },
-  { id: 22, name: 'Surkh Jaal Embroidered Bedsheet', colour: 'Crimson & gold', image: '/products/collection/surkh-jaal-fabric.jpeg', category: 'Bedsheets' },
-  { id: 23, name: 'Velvet Calligraphy Wall Hanging', colour: 'Maroon & gold', image: '/products/collection/velvet-calligraphy-banner.jpeg', category: 'Wall Hangings' },
-  { id: 24, name: 'Blush Mint Embroidered Bedsheet', colour: 'Blush & mint', image: '/products/collection/blush-mint-border.jpeg', category: 'Bedsheets' },
-  { id: 25, name: 'Blush Mint Jaal Bedsheet', colour: 'Blush & mint', image: '/products/collection/blush-mint-jaal.jpeg', category: 'Bedsheets' },
-  { id: 26, name: 'Velvet Paisley Pillow Cover', colour: 'Maroon velvet', image: '/products/collection/velvet-paisley-work.jpeg', category: 'Cushions & Pillows' },
+  { id: 19, name: 'Mehrun Velvet Bedding Set', colour: 'Maroon velvet', image: '/products/collection/velvet-cushion-set.jpeg', gallery: ['/products/collection/velvet-cushion-set.jpeg', '/products/collection/velvet-border-panel.jpeg', '/products/collection/velvet-bolster-set.jpeg', '/products/collection/velvet-floral-panel.jpeg', '/products/collection/velvet-paisley-work.jpeg', '/products/collection/round-velvet-mat.jpeg'], category: 'Cushions & Pillows' },
+  { id: 23, name: 'Velvet Calligraphy Wall Hanging Set', colour: 'Jewel tones & gold', image: '/products/collection/velvet-calligraphy-banner.jpeg', gallery: ['/products/collection/velvet-calligraphy-banner.jpeg', '/products/collection/velvet-wall-hanging.jpeg', '/products/collection/calligraphy-ornaments.jpeg'], category: 'Wall Hangings' },
+  { id: 24, name: 'Blush Mint Embroidered Bedsheet', colour: 'Blush & mint', image: '/products/collection/blush-mint-border.jpeg', gallery: ['/products/collection/blush-mint-border.jpeg', '/products/collection/blush-mint-jaal.jpeg'], category: 'Bedsheets' },
   { id: 27, name: 'Ivory Meena Embroidered Bedsheet', colour: 'Ivory, green & pink', image: '/products/collection/ivory-meena-border.jpeg', category: 'Bedsheets' },
-  { id: 28, name: 'Velvet Dua Wall Hanging', colour: 'Maroon & gold', image: '/products/collection/velvet-wall-hanging.jpeg', category: 'Wall Hangings' },
-  { id: 29, name: 'Round Velvet Cushion', colour: 'Maroon & gold', image: '/products/collection/round-velvet-mat.jpeg', category: 'Cushions & Pillows' },
-  { id: 30, name: 'Velvet Bolster & Bedsheet Set', colour: 'Maroon velvet', image: '/products/collection/velvet-bolster-set.jpeg', category: 'Cushions & Pillows' },
-  { id: 31, name: 'Calligraphy Wall Ornaments', colour: 'Jewel tones & gold', image: '/products/collection/calligraphy-ornaments.jpeg', category: 'Wall Hangings' },
-  { id: 32, name: 'Velvet Cushion & Bedsheet Set', colour: 'Maroon & gold', image: '/products/collection/velvet-cushion-set.jpeg', category: 'Cushions & Pillows' },
   { id: 33, name: 'Bridal Runway Inspiration', colour: 'Deep bridal red', image: '/products/collection/bridal-inspiration-edit.jpeg', category: 'Inspiration Edit' },
 ];
 
@@ -42,6 +31,7 @@ export default function Home() {
   const [cart, setCart] = useState<number[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [filter, setFilter] = useState('All');
+  const [imageIndexes, setImageIndexes] = useState<Record<number, number>>({});
   const visibleProducts = filter === 'All' ? products : products.filter((product) => product.category === filter);
   const cartProducts = useMemo(() => cart.map((id) => products.find((product) => product.id === id)!), [cart]);
 
@@ -99,12 +89,15 @@ export default function Home() {
       <section className="product-section shell" id="shop">
         <div className="product-toolbar"><p>{visibleProducts.length} handcrafted pieces</p><div>{['All','Lehengas','Sharara Sets','Bedsheets','Cushions & Pillows','Wall Hangings','Inspiration Edit'].map((item) => <button type="button" key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
         <div className="product-grid">
-          {visibleProducts.map((product, index) => (
+          {visibleProducts.map((product, index) => {
+            const images = product.gallery ?? [product.image];
+            const activeImage = imageIndexes[product.id] ?? 0;
+            return (
             <article className="product-card" key={product.id} data-reveal style={{'--delay': `${(index % 4) * 70}ms`} as React.CSSProperties}>
-              <a className="product-image" href="#shop" aria-label={`View ${product.name}`}><img src={product.image} alt={product.name}/><span className="piece-number">{String(product.id).padStart(2, '0')}</span><span className="quick-view">View details</span></a>
+              <div className="product-image"><img src={images[activeImage]} alt={`${product.name}, view ${activeImage + 1} of ${images.length}`} width="900" height="1200" loading={index < 4 ? 'eager' : 'lazy'} decoding="async"/><span className="piece-number">{String(product.id).padStart(2, '0')}</span>{images.length > 1 && <><button className="gallery-arrow gallery-prev" type="button" aria-label={`Previous photo of ${product.name}`} onClick={() => setImageIndexes((current) => ({...current, [product.id]: (activeImage - 1 + images.length) % images.length}))}>‹</button><button className="gallery-arrow gallery-next" type="button" aria-label={`Next photo of ${product.name}`} onClick={() => setImageIndexes((current) => ({...current, [product.id]: (activeImage + 1) % images.length}))}>›</button><div className="gallery-dots" aria-label={`${images.length} product photos`}>{images.map((_, imageIndex) => <button type="button" key={imageIndex} className={imageIndex === activeImage ? 'active' : ''} aria-label={`Show photo ${imageIndex + 1} of ${product.name}`} onClick={() => setImageIndexes((current) => ({...current, [product.id]: imageIndex}))}/>)}</div></>}</div>
               <div className="product-info"><div><p>{product.category} · {product.colour}</p><h3>{product.name}</h3><strong>₹7,000</strong></div><button type="button" aria-label={`Add ${product.name} to bag`} onClick={() => addToCart(product.id)}>+</button></div>
             </article>
-          ))}
+          )})}
         </div>
       </section>
 
