@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { productBySlug, products, whatsappUrl } from '@/app/lib/products';
+import { ProductOptions } from '@/app/components/product-options';
+import { productBySlug, products } from '@/app/lib/products';
 
 export function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
@@ -28,7 +29,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
           <p className="detail-description">{product.description}</p>
           <strong className="detail-price">₹{product.price.toLocaleString('en-IN')}</strong>
           <p className="dummy-price-note">Sample price — final details will be confirmed personally.</p>
-          <a className="detail-whatsapp" href={whatsappUrl(product)} target="_blank" rel="noreferrer">Chat on WhatsApp <span>↗</span></a>
+          <ProductOptions product={product} />
           <dl className="detail-notes"><div><dt>Fitting</dt><dd>Custom fitting available for outfit pieces.</dd></div><div><dt>Delivery</dt><dd>India-wide delivery with personal order support.</dd></div></dl>
         </aside>
       </section>

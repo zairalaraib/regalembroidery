@@ -45,7 +45,15 @@ export const modelProducts = products.filter((product) => product.featuredModel)
 
 export const productBySlug = (slug: string) => products.find((product) => product.slug === slug);
 
-export const whatsappUrl = (product: Product) => {
-  const message = `Hello Regal Embroidery, I am interested in ${product.name} (${product.category}) for ₹${product.price.toLocaleString('en-IN')}. Please share availability and details.`;
+export const sizeOptionsFor = (category: ProductCategory) => {
+  if (category === 'Lehengas' || category === 'Sharara Sets') return { label: 'Choose your size', options: ['XS', 'S', 'M', 'L', 'XL', 'Custom fitting'] };
+  if (category === 'Embroidered Fabrics') return { label: 'Choose fabric length', options: ['2.5 metres', '3 metres', '4 metres', 'Custom length'] };
+  if (category === 'Quran Covers') return { label: 'Choose cover size', options: ['Standard', 'Large', 'Custom'] };
+  return { label: 'Choose set size', options: ['Standard set', 'Grand set', 'Custom'] };
+};
+
+export const whatsappUrl = (product: Product, selectedOption?: string) => {
+  const optionLine = selectedOption ? ` Selected option: ${selectedOption}.` : '';
+  const message = `Hello Regal Embroidery, I am interested in ${product.name} (${product.category}) for ₹${product.price.toLocaleString('en-IN')}.${optionLine} Please share availability and details.`;
   return `https://wa.me/919308074781?text=${encodeURIComponent(message)}`;
 };

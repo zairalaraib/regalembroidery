@@ -1,10 +1,12 @@
 'use client';
 
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { modelProducts, productCategories, products, whatsappUrl } from '@/app/lib/products';
 
 export default function Home() {
+  const router = useRouter();
   const [cart, setCart] = useState<number[]>([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [filter, setFilter] = useState('All');
@@ -71,13 +73,13 @@ export default function Home() {
         <div className="product-grid">
           {visibleProducts.map((product, index) => {
             const activeImage = imageIndexes[product.id] ?? 0;
-            return <article className="product-card" key={product.id}>
+            return <article className="product-card product-card-link" key={product.id} role="link" tabIndex={0} aria-label={`View ${product.name}`} onClick={(event) => { if (!(event.target as HTMLElement).closest('a, button')) router.push(`/products/${product.slug}`); }} onKeyDown={(event) => { if (event.key === 'Enter' && event.target === event.currentTarget) router.push(`/products/${product.slug}`); }}>
               <div className="product-image">
                 <Link className="product-image-link" href={`/products/${product.slug}`} aria-label={`View ${product.name}`}><img src={product.gallery[activeImage]} alt={`${product.name}, view ${activeImage + 1} of ${product.gallery.length}`} width="900" height="1200" loading={index < 4 ? 'eager' : 'lazy'} decoding="async" /></Link>
                 <span className="piece-number">{String(product.id).padStart(2, '0')}</span>
                 {product.gallery.length > 1 && <><button className="gallery-arrow gallery-prev" type="button" aria-label={`Previous photo of ${product.name}`} onClick={() => setImageIndexes((current) => ({ ...current, [product.id]: (activeImage - 1 + product.gallery.length) % product.gallery.length }))}>‹</button><button className="gallery-arrow gallery-next" type="button" aria-label={`Next photo of ${product.name}`} onClick={() => setImageIndexes((current) => ({ ...current, [product.id]: (activeImage + 1) % product.gallery.length }))}>›</button><div className="gallery-dots" aria-label={`${product.gallery.length} product photos`}>{product.gallery.map((_, photoIndex) => <button type="button" key={photoIndex} className={photoIndex === activeImage ? 'active' : ''} aria-label={`Show photo ${photoIndex + 1} of ${product.name}`} onClick={() => setImageIndexes((current) => ({ ...current, [product.id]: photoIndex }))} />)}</div></>}
               </div>
-              <div className="product-info"><div><p>{product.category} · {product.colour}</p><h3>{product.name}</h3><strong>₹{product.price.toLocaleString('en-IN')}</strong><div className="product-actions"><Link href={`/products/${product.slug}`}>View piece</Link><a href={whatsappUrl(product)} target="_blank" rel="noreferrer">WhatsApp</a></div></div><button type="button" aria-label={`Add ${product.name} to bag`} onClick={() => addToBag(product.id)}>+</button></div>
+              <div className="product-info"><div><p>{product.category} · {product.colour}</p><h3><Link href={`/products/${product.slug}`}>{product.name}</Link></h3><strong>₹{product.price.toLocaleString('en-IN')}</strong><div className="product-actions"><Link href={`/products/${product.slug}`}>View product</Link><a href={whatsappUrl(product)} target="_blank" rel="noreferrer">WhatsApp</a></div></div><button type="button" aria-label={`Add ${product.name} to bag`} onClick={() => addToBag(product.id)}>+</button></div>
             </article>;
           })}
         </div>
