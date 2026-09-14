@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useMemo, useState, type CSSProperties } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { modelProducts, productCategories, products, whatsappUrl } from '@/app/lib/products';
 
 export default function Home() {
@@ -16,6 +16,17 @@ export default function Home() {
     const observer = new IntersectionObserver((entries) => entries.forEach((entry) => entry.isIntersecting && entry.target.classList.add('revealed')), { threshold: .12 });
     document.querySelectorAll('[data-reveal]').forEach((element) => observer.observe(element));
     return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    const warmImages = window.setTimeout(() => {
+      for (const imageSource of new Set(products.map((product) => product.image))) {
+        const image = new window.Image();
+        image.decoding = 'async';
+        image.src = imageSource;
+      }
+    }, 700);
+    return () => window.clearTimeout(warmImages);
   }, []);
 
   useEffect(() => {
@@ -60,7 +71,7 @@ export default function Home() {
         <div className="product-grid">
           {visibleProducts.map((product, index) => {
             const activeImage = imageIndexes[product.id] ?? 0;
-            return <article className="product-card" key={product.id} data-reveal style={{ '--delay': `${(index % 4) * 70}ms` } as CSSProperties}>
+            return <article className="product-card" key={product.id}>
               <div className="product-image">
                 <Link className="product-image-link" href={`/products/${product.slug}`} aria-label={`View ${product.name}`}><img src={product.gallery[activeImage]} alt={`${product.name}, view ${activeImage + 1} of ${product.gallery.length}`} width="900" height="1200" loading={index < 4 ? 'eager' : 'lazy'} decoding="async" /></Link>
                 <span className="piece-number">{String(product.id).padStart(2, '0')}</span>
