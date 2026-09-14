@@ -14,7 +14,7 @@ export default async function ProductPage({ params }: { params: Promise<{ slug: 
   return (
     <main className="product-page">
       <nav className="detail-nav shell" aria-label="Product navigation">
-        <Link className="detail-brand" href="/"><span>र</span> Regal Embroidery</Link>
+        <Link className="detail-brand" href="/"><img src="/brand/regal-wordmark-mark.png" alt="Regal" /></Link>
         <Link href="/#shop">← Back to collection</Link>
       </nav>
       <section className="product-detail shell">
