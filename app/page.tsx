@@ -21,20 +21,20 @@ const products = [
   { id: 16, name: 'Feroza Rani Sharara', colour: 'Turquoise & rani pink', image: '/products/collection/feroza-rani-sharara.jpeg', category: 'Sharara Sets' },
   { id: 17, name: 'Feroza Karigari Sharara', colour: 'Turquoise & gold', image: '/products/collection/feroza-karigari-sharara.jpeg', category: 'Sharara Sets' },
   { id: 18, name: 'Mehrun Zar Sharara', colour: 'Maroon & antique gold', image: '/products/collection/mehrun-zar-sharara.jpeg', category: 'Sharara Sets' },
-  { id: 19, name: 'Mehrun Velvet Border Panel', colour: 'Maroon velvet', image: '/products/collection/velvet-border-panel.jpeg', category: 'Bespoke Work' },
-  { id: 20, name: 'Surkh Floral Karigari', colour: 'Red & antique gold', image: '/products/collection/surkh-floral-karigari.jpeg', category: 'Bespoke Work' },
-  { id: 21, name: 'Mehrun Floral Panel', colour: 'Maroon velvet', image: '/products/collection/velvet-floral-panel.jpeg', category: 'Bespoke Work' },
-  { id: 22, name: 'Surkh Jaal Embroidered Fabric', colour: 'Crimson & gold', image: '/products/collection/surkh-jaal-fabric.jpeg', category: 'Bespoke Work' },
-  { id: 23, name: 'Velvet Calligraphy Banner', colour: 'Maroon & gold', image: '/products/collection/velvet-calligraphy-banner.jpeg', category: 'Bespoke Work' },
-  { id: 24, name: 'Blush Mint Embroidered Border', colour: 'Blush & mint', image: '/products/collection/blush-mint-border.jpeg', category: 'Bespoke Work' },
-  { id: 25, name: 'Blush Mint Jaal Fabric', colour: 'Blush & mint', image: '/products/collection/blush-mint-jaal.jpeg', category: 'Bespoke Work' },
-  { id: 26, name: 'Velvet Paisley Karigari', colour: 'Maroon velvet', image: '/products/collection/velvet-paisley-work.jpeg', category: 'Bespoke Work' },
-  { id: 27, name: 'Ivory Meena Embroidered Fabric', colour: 'Ivory, green & pink', image: '/products/collection/ivory-meena-border.jpeg', category: 'Bespoke Work' },
-  { id: 28, name: 'Velvet Dua Wall Hanging', colour: 'Maroon & gold', image: '/products/collection/velvet-wall-hanging.jpeg', category: 'Bespoke Work' },
-  { id: 29, name: 'Round Velvet Celebration Mat', colour: 'Maroon & gold', image: '/products/collection/round-velvet-mat.jpeg', category: 'Bespoke Work' },
-  { id: 30, name: 'Velvet Bolster & Panel Set', colour: 'Maroon velvet', image: '/products/collection/velvet-bolster-set.jpeg', category: 'Bespoke Work' },
-  { id: 31, name: 'Calligraphy Celebration Ornaments', colour: 'Jewel tones & gold', image: '/products/collection/calligraphy-ornaments.jpeg', category: 'Bespoke Work' },
-  { id: 32, name: 'Velvet Cushion Set', colour: 'Maroon & gold', image: '/products/collection/velvet-cushion-set.jpeg', category: 'Bespoke Work' },
+  { id: 19, name: 'Mehrun Velvet Bedsheet', colour: 'Maroon velvet', image: '/products/collection/velvet-border-panel.jpeg', category: 'Bedsheets' },
+  { id: 20, name: 'Surkh Floral Bedsheet', colour: 'Red & antique gold', image: '/products/collection/surkh-floral-karigari.jpeg', category: 'Bedsheets' },
+  { id: 21, name: 'Mehrun Velvet Pillow Cover', colour: 'Maroon velvet', image: '/products/collection/velvet-floral-panel.jpeg', category: 'Cushions & Pillows' },
+  { id: 22, name: 'Surkh Jaal Embroidered Bedsheet', colour: 'Crimson & gold', image: '/products/collection/surkh-jaal-fabric.jpeg', category: 'Bedsheets' },
+  { id: 23, name: 'Velvet Calligraphy Wall Hanging', colour: 'Maroon & gold', image: '/products/collection/velvet-calligraphy-banner.jpeg', category: 'Wall Hangings' },
+  { id: 24, name: 'Blush Mint Embroidered Bedsheet', colour: 'Blush & mint', image: '/products/collection/blush-mint-border.jpeg', category: 'Bedsheets' },
+  { id: 25, name: 'Blush Mint Jaal Bedsheet', colour: 'Blush & mint', image: '/products/collection/blush-mint-jaal.jpeg', category: 'Bedsheets' },
+  { id: 26, name: 'Velvet Paisley Pillow Cover', colour: 'Maroon velvet', image: '/products/collection/velvet-paisley-work.jpeg', category: 'Cushions & Pillows' },
+  { id: 27, name: 'Ivory Meena Embroidered Bedsheet', colour: 'Ivory, green & pink', image: '/products/collection/ivory-meena-border.jpeg', category: 'Bedsheets' },
+  { id: 28, name: 'Velvet Dua Wall Hanging', colour: 'Maroon & gold', image: '/products/collection/velvet-wall-hanging.jpeg', category: 'Wall Hangings' },
+  { id: 29, name: 'Round Velvet Cushion', colour: 'Maroon & gold', image: '/products/collection/round-velvet-mat.jpeg', category: 'Cushions & Pillows' },
+  { id: 30, name: 'Velvet Bolster & Bedsheet Set', colour: 'Maroon velvet', image: '/products/collection/velvet-bolster-set.jpeg', category: 'Cushions & Pillows' },
+  { id: 31, name: 'Calligraphy Wall Ornaments', colour: 'Jewel tones & gold', image: '/products/collection/calligraphy-ornaments.jpeg', category: 'Wall Hangings' },
+  { id: 32, name: 'Velvet Cushion & Bedsheet Set', colour: 'Maroon & gold', image: '/products/collection/velvet-cushion-set.jpeg', category: 'Cushions & Pillows' },
   { id: 33, name: 'Bridal Runway Inspiration', colour: 'Deep bridal red', image: '/products/collection/bridal-inspiration-edit.jpeg', category: 'Inspiration Edit' },
 ];
 
@@ -97,7 +97,7 @@ export default function Home() {
       </section>
 
       <section className="product-section shell" id="shop">
-        <div className="product-toolbar"><p>{visibleProducts.length} heirloom pieces</p><div>{['All','Lehengas','Sharara Sets','Bespoke Work','Inspiration Edit'].map((item) => <button type="button" key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
+        <div className="product-toolbar"><p>{visibleProducts.length} handcrafted pieces</p><div>{['All','Lehengas','Sharara Sets','Bedsheets','Cushions & Pillows','Wall Hangings','Inspiration Edit'].map((item) => <button type="button" key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
         <div className="product-grid">
           {visibleProducts.map((product, index) => (
             <article className="product-card" key={product.id} data-reveal style={{'--delay': `${(index % 4) * 70}ms`} as React.CSSProperties}>
