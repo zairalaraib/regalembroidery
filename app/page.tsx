@@ -97,7 +97,7 @@ export default function Home() {
       </section>
 
       <section className="product-section shell" id="shop">
-        <div className="product-toolbar"><p>{visibleProducts.length} heirloom pieces</p><div>{['All','Lehengas','Sharara Sets','Bespoke Work','Inspiration Edit'].map((item) => <button key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
+        <div className="product-toolbar"><p>{visibleProducts.length} heirloom pieces</p><div>{['All','Lehengas','Sharara Sets','Bespoke Work','Inspiration Edit'].map((item) => <button type="button" key={item} className={filter === item ? 'active' : ''} onClick={() => setFilter(item)}>{item}</button>)}</div></div>
         <div className="product-grid">
           {visibleProducts.map((product, index) => (
             <article className="product-card" key={product.id} data-reveal style={{'--delay': `${(index % 4) * 70}ms`} as React.CSSProperties}>
